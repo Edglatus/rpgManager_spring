@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de campanhas</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" 
+			 th:object="${campanha}" th:action="@{/campanhas}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<input type="date" name="cdate" class="form-control" th:field="*{cdate}" placeholder="Data">
+					<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+				</div>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Data</th>
+						<th rowspan=2>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c: ${campanhas}" >
+						<td th:text="${c.nome}">nome</td>
+						<td th:text="${#dates.format(c.cdate, 'dd/MM/yyyy')}">data</td>
+						<td><a class="glyphicon glyphicon-trash" th:href="@{/campanhas/excluir/}+${c.id}">Excluir</a></td>
+						<td><a class="glyphicon glyphicon-pencil" th:href="@{/campanhas/alterar/}+${c.id}">Alterar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

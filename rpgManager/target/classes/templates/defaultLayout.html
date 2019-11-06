@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>RPG Manager</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href='@{/}'>
+					<img height=150% style="display: inline-block" th:src="@{/images/zwei.png}"/>
+					GestãoRPG
+				</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href='@{/}'>Home</a> 
+				<li><a th:href='@{/local}'>Localizacao</a>
+				<li><a th:href='@{/jogadores}'>Jogadores</a>
+				<li><a th:href='@{/campanhas}'>Campanhas</a>
+				<li><a th:href='@{/classes}'>Classes</a>
+				<li><a th:href='@{/personagens}'>Personagens</a>
+			</ul>
+		</div>
+	</nav>
+
+	<section layout:fragment="content">
+	</section>
+</body>
+
+</html>

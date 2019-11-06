@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de personagens</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" 
+			 th:object="${personagem}" th:action="@{/personagens}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<select class="form-control" th:field="*{classe}">
+						<option th:each="c:${classes}" th:value=${c.id} th:text="${c.nome}"></option>
+					</select>
+					<select class="form-control" th:field="*{campanha}">
+						<option th:each="c:${campanhas}" th:value=${c.id} th:text="${c.nome}"></option>
+					</select>
+					<select class="form-control" th:field="*{jogador}">
+						<option th:each="j:${jogadores}" th:value=${j.id} th:text="${j.nome}"></option>
+					</select>
+					<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+				</div>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Classe</th>
+						<th>Campanha</th>
+						<th>Jogador</th>
+						<th rowspan=2>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p: ${personagens}" >
+						<td th:text="${p.nome}">nome</td>
+						<td th:text="${p.classe.nome}">classe</td>
+						<td th:text="${p.campanha.nome}">campanha</td>
+						<td th:text="${p.jogador.nome}">jogador</td>
+						<td><a class="glyphicon glyphicon-trash" th:href="@{/personagens/excluir/}+${p.id}">Excluir</a></td>
+						<td><a class="glyphicon glyphicon-pencil" th:href="@{/personagens/alterar/}+${p.id}">Alterar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

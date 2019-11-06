@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de jogadores</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" 
+			 th:object="${jogador}" th:action="@{/jogadores}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+				</div>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th rowspan=2>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="j: ${jogadores}" >
+						<td th:text="${j.nome}">nome</td>
+						<td><a class="glyphicon glyphicon-trash" th:href="@{/jogadores/excluir/}+${j.id}">Excluir</a></td>
+						<td><a class="glyphicon glyphicon-pencil" th:href="@{/jogadores/alterar/}+${j.id}">Alterar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
